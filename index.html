@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>夕拾交易平台</title>
+  <!-- 开发环境 -->
+  <% if (process.env.NODE_ENV === 'development') { %>
+    <script>
+      ;(function () {
+        window.SITE_CONFIG = {};
+        window.SITE_CONFIG['baseURL'] = 'http://localhost:8088/transaction';
+      })();
+    </script>
+  <% } %>
+  <!-- 开启api请求代理拦截处理时, 配置baseURL地址. (是否开启代理通过[./config/dev.env.js]配置) -->
+  <% if (process.env.NODE_ENV === 'development') { %>
+    <script>
+      ;(function () {
+        if ('<%=process.env.OPEN_PROXY %>' === 'true') {
+          window.SITE_CONFIG['baseURL'] = '/proxyApi'
+        }
+      })();
+    </script>
+  <% } %>
+</head>
+<body>
+  <div id="app"></div>
+</body>
+</html>

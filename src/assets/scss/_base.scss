@@ -1,0 +1,441 @@
+*,
+*:before,
+*:after {
+  box-sizing: border-box;
+}
+body {
+  font-family: "Helvetica Neue", Helvetica, "PingFang SC", "Hiragino Sans GB", "Microsoft YaHei", "微软雅黑", Arial, sans-serif;
+  font-size: 14px;
+  line-height: 1.15;
+  color: #303133;
+  background-color: #fff;
+}
+a {
+  color: mix(#fff, $--color-primary, 20%);
+  text-decoration: none;
+  &:focus,
+  &:hover {
+    color: $--color-primary;
+    text-decoration: underline;
+  }
+}
+img {
+  vertical-align: middle;
+}
+:hover,
+:focus {
+  outline: none;
+}
+
+
+/* Utils
+------------------------------ */
+.clearfix:before,
+.clearfix:after {
+  content: " ";
+  display: table;
+}
+.clearfix:after {
+  clear: both;
+}
+.m-auto {
+  margin: auto !important;
+}
+.mt-auto {
+  margin-top: auto !important;
+}
+.mr-auto {
+  margin-right: auto !important;
+}
+.mb-auto {
+  margin-bottom: auto !important;
+}
+.ml-auto {
+  margin-left: auto !important;
+}
+
+
+/* Reset element-ui
+------------------------------ */
+.site-wrapper {
+  .el-pagination {
+    margin-top: 15px;
+    text-align: right;
+  }
+  .el-date-editor .el-range-separator {
+    width: 8%;
+  }
+}
+
+
+/* Layout
+------------------------------ */
+.site-wrapper {
+  position: relative;
+  padding-top: $navbar--height;
+}
+.site-wrapper--full {
+  padding-top: 0;
+  .site-content {
+    padding: 0;
+    &__wrapper {
+      min-height: 100%;
+      margin-left: 0;
+      background-color: transparent;
+    }
+  }
+}
+
+
+/* Sidebar fold
+------------------------------ */
+.site-sidebar--fold {
+  .site-navbar {
+    &__header,
+    &__brand {
+      width: $sidebar--width-fold;
+    }
+    &__brand {
+      &-lg {
+        display: none;
+      }
+      &-mini {
+        display: inline-block;
+      }
+    }
+  }
+  .site-sidebar {
+    &__inner {
+      width: $sidebar--width-fold + 20px;
+    }
+    &,
+    &__menu {
+      width: $sidebar--width-fold;
+    }
+    &__menu > li {
+      text-align: center;
+    }
+    &__menu-icon {
+      margin-right: 0;
+      font-size: 20px;
+    }
+  }
+  .site-content {
+    &__wrapper {
+      margin-left: $sidebar--width-fold;
+    }
+    &--tabs > .el-tabs > .el-tabs__header {
+      left: $sidebar--width-fold;
+    }
+  }
+}
+// animation
+.site-navbar__header,
+.site-navbar__brand,
+.site-sidebar,
+.site-sidebar__inner,
+.site-sidebar__menu,
+.site-sidebar__menu-icon,
+.site-content__wrapper,
+.site-content--tabs > .el-tabs > .el-tabs__header {
+  transition: display .3s, left .3s, width .3s, margin .3s, font-size .3s;
+}
+
+
+/* Navbar
+------------------------------ */
+.site-navbar {
+  position: fixed;
+  top: 0;
+  right: 0;
+  left: 0;
+  z-index: 1030;
+  display: flex;
+  align-items: stretch;
+  height: $navbar--height;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, .08);
+  background-color: $--color-primary;
+  &--colorful {
+    .site-navbar__body {
+      background-color: transparent;
+    }
+    .site-navbar__menu {
+      > .el-menu-item,
+      > .el-submenu .el-submenu__title {
+        color: #fff;
+        &:focus,
+        &:hover {
+          color: #fff;
+          background-color: mix(#000, $--color-primary, 15%);
+        }
+      }
+      > .el-menu-item.is-active,
+      > .el-submenu.is-active .el-submenu__title {
+        border-bottom-color: mix(#fff, $--color-primary, 85%);
+      }
+      .el-menu-item i,
+      .el-submenu__title i,
+      .el-dropdown {
+        color: #fff;
+      }
+    }
+    .el-menu--popup-bottom-start {
+      background-color: $--color-primary;
+    }
+  }
+  &__header {
+    position: relative;
+    width: $sidebar--width;
+    height: $navbar--height;
+  }
+  &__brand {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 5px;
+    margin: 0;
+    width: 100%;
+    height: 100%;
+    font-size: 20px;
+    text-transform: uppercase;
+    white-space: nowrap;
+    color: #fff;
+    overflow: hidden;
+    &-lg,
+    &-mini {
+      max-width: 100%;
+      color: #fff;
+      cursor: pointer;
+      &:focus,
+      &:hover {
+        color: #fff;
+        text-decoration: none;
+      }
+    }
+    &-mini {
+      display: none;
+    }
+  }
+  &__body {
+    position: relative;
+    display: flex;
+    flex: 1;
+    padding: 0 15px;
+    background-color: #fff;
+    overflow: hidden;
+  }
+  &__menu {
+    background-color: transparent;
+    border-bottom: 0;
+    a:focus,
+    a:hover {
+      text-decoration: none;
+    }
+    .el-menu-item,
+    .el-submenu .el-submenu__title {
+      height: $navbar--height;
+      line-height: $navbar--height;
+    }
+    .el-submenu > .el-menu {
+      top: 55px;
+    }
+    .el-menu-item > .el-dropdown {
+      color: #909399;
+      &:focus,
+      &:hover {
+        color: #303133;
+      }
+    }
+    .el-badge {
+      display: inline;
+      z-index: 2;
+      &__content {
+        line-height: 16px;
+      }
+    }
+  }
+  &__switch {
+    font-size: 18px;
+    margin-left: -15px !important;
+    border-bottom: none !important;
+  }
+  &__avatar {
+    border-bottom: none !important;
+    * {
+      vertical-align: inherit;
+    }
+    .el-dropdown-link {
+      > img {
+        width: 36px;
+        height: auto;
+        margin-right: 5px;
+        border-radius: 100%;
+        vertical-align: middle;
+      }
+    }
+  }
+}
+
+
+/* Sidebar
+------------------------------ */
+.site-sidebar {
+  position: fixed;
+  top: $navbar--height;
+  left: 0;
+  bottom: 0;
+  z-index: 1020;
+  width: $sidebar--width;
+  background-color: #fff;
+  box-shadow: 2px 0 4px rgba(0, 0, 0, 0.08);
+  overflow: hidden;
+  &--dark,
+  &--dark-popper {
+    background-color: $sidebar--background-color-dark;
+    .site-sidebar__menu,
+    > .el-menu--popup {
+      background-color: $sidebar--background-color-dark;
+      .el-menu-item,
+      .el-submenu .el-submenu__title {
+        color: $sidebar--text-color-dark;
+        &:focus,
+        &:hover {
+          color: mix(#fff, $sidebar--text-color-dark, 50%);
+          background-color: mix(#fff, $sidebar--background-color-dark, 2.5%);
+        }
+      }
+      .el-menu,
+      .el-submenu.is-opened {
+        background-color: mix(#000, $sidebar--background-color-dark, 15%);
+      }
+      .el-menu-item.is-active,
+      .el-submenu.is-active .el-submenu__title {
+        color: mix(#fff, $sidebar--text-color-dark, 80%);
+      }
+    }
+  }
+  &__inner {
+    position: relative;
+    z-index: 1;
+    width: $sidebar--width + 20px;
+    height: 100%;
+    padding-bottom: 15px;
+    overflow-x: hidden;
+    overflow-y: scroll;
+  }
+  &__menu {
+    width: $sidebar--width;
+    border-right: 0;
+  }
+  &__menu-icon {
+    width: 24px !important;
+    margin-right: 5px;
+    text-align: center;
+    font-size: 16px;
+    color: inherit !important;
+  }
+}
+
+
+/* Content
+------------------------------ */
+.site-content {
+  position: relative;
+  padding: 15px;
+  &__wrapper {
+    position: relative;
+    margin-left: $sidebar--width;
+    min-height: calc(100vh - #{$navbar--height});
+    background-color: $content--background-color;
+  }
+  > .el-card > .el-card__body {
+    position: relative;
+    min-height: $content--card-height;
+  }
+  &--tabs {
+    padding: 40px 0 0;
+  }
+  &--tabs-tools {
+    position: fixed;
+    top: $navbar--height;
+    right: 0;
+    z-index: 931;
+    height: 40px;
+    padding: 0 12px;
+    font-size: 16px;
+    line-height: 40px;
+    background-color: $content--background-color;
+    cursor: pointer;
+    .el-icon--right {
+      margin-left: 0;
+    }
+  }
+  > .el-tabs {
+    > .el-tabs__header {
+      position: fixed;
+      top: $navbar--height;
+      left: $sidebar--width;
+      right: 0;
+      z-index: 930;
+      padding: 0 55px 0 15px;
+      box-shadow: 0 2px 4px rgba(0, 0, 0, .08);
+      background-color: #fff;
+      > .el-tabs__nav-wrap {
+        margin-bottom: 0;
+        &:after {
+          display: none;
+        }
+      }
+    }
+    > .el-tabs__content {
+      padding: 15px;
+      > .el-tab-pane > .el-card > .el-card__body {
+        min-height: $content--card-height-tabs;
+      }
+      > .el-tab-pane.is-iframe > .el-card > .el-card__body {
+        min-height: auto;
+        height: $content--card-height-tabs;
+      }
+    }
+  }
+  // 重置quill富文本编辑器
+  .ql-toolbar {
+    line-height: 20px;
+    &.ql-snow {
+      border-color: #dcdfe6;
+    }
+    .ql-formats {
+      margin: 0 5px;
+    }
+  }
+  .ql-container {
+    height: 150px;
+    &.ql-snow {
+      border-color: #dcdfe6;
+    }
+  }
+}
+
+.avatar-uploader .el-upload {
+  border: 1px dashed #d9d9d9;
+  border-radius: 6px;
+  cursor: pointer;
+  position: relative;
+  overflow: hidden;
+}
+.avatar-uploader .el-upload:hover {
+  border-color: #409EFF;
+}
+.avatar-uploader-icon {
+  font-size: 28px;
+  color: #8c939d;
+  width: 150px;
+  height: 150px;
+  line-height: 150px;
+  text-align: center;
+}
+.avatar {
+  width: 150px;
+  height: 150px;
+  display: block;
+}
